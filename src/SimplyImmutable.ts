@@ -1,9 +1,15 @@
-import { modifyImmutable } from 'simply-immutable';
 import { TestSuite } from './TestSuite';
+
+import { freezeImmutableStructures, modifyImmutable } from 'simply-immutable';
 
 export class SimplyImmutable extends TestSuite {
   constructor(useFreeze: boolean) {
     super(useFreeze);
+  }
+
+  init(initialObject) {
+    freezeImmutableStructures(this.useFreeze);
+    return super.init(initialObject);
   }
   
   set(obj, key, val) {

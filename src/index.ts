@@ -10,13 +10,12 @@ import { SimplyImmutable } from './SimplyImmutable';
 import { TestSuite } from './TestSuite';
 import { TimmLib } from './TimmLib';
 
-import { makeImmutable } from 'simply-immutable';
-
 import chalk from 'chalk';
 import * as expect from 'expect';
 import * as _ from 'lodash';
+import { deepFreeze } from 'simply-immutable';
 
-const INITIAL_OBJECT = makeImmutable({
+const INITIAL_OBJECT = deepFreeze({
   toggle: false,
   b: 3,
   str: 'foo',
@@ -38,7 +37,7 @@ const INITIAL_OBJECT = makeImmutable({
   }
 });
 
-const DEEP_PATH = makeImmutable(['d', 'd9', 'b', 'b', 'b']);
+const DEEP_PATH = deepFreeze(['d', 'd9', 'b', 'b', 'b']);
 
 const ARRAY_LENGTH1 = 100;
 const ARRAY_LENGTH2 = 1000;
@@ -49,15 +48,15 @@ const INITIAL_ARRAY2 = new Array(ARRAY_LENGTH2);
 for (let i = 0; i < INITIAL_ARRAY1.length; ++i) {
   INITIAL_ARRAY1[i] = { a: 1, b: 2 };
 }
-makeImmutable(INITIAL_ARRAY1);
+deepFreeze(INITIAL_ARRAY1);
 
 for (let i = 0; i < INITIAL_ARRAY2.length; ++i) {
   INITIAL_ARRAY2[i] = { a: 1, b: 2 };
 }
-makeImmutable(INITIAL_ARRAY2);
+deepFreeze(INITIAL_ARRAY2);
 
-const INITIAL_DEEP_ARRAY1 = makeImmutable([0, 1, 2, INITIAL_ARRAY1, [5, 6, 7]]);
-const INITIAL_DEEP_ARRAY2 = makeImmutable([0, 1, 2, INITIAL_ARRAY2, [5, 6, 7]]);
+const INITIAL_DEEP_ARRAY1 = deepFreeze([0, 1, 2, INITIAL_ARRAY1, [5, 6, 7]]);
+const INITIAL_DEEP_ARRAY2 = deepFreeze([0, 1, 2, INITIAL_ARRAY2, [5, 6, 7]]);
 
 const R = 5e5;
 const W = R / 5;
