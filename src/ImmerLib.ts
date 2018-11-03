@@ -2,12 +2,16 @@ import { TestSuite } from './TestSuite';
 
 import * as immer from 'immer';
 
-immer.setAutoFreeze(false);
 const produce = immer.default;
 
 export class ImmerLib extends TestSuite {
   constructor(useFreeze: boolean) {
     super(useFreeze);
+  }
+
+  init(initialObject) {
+    immer.setAutoFreeze(this.useFreeze);
+    return super.init(initialObject);
   }
   
   set(obj, key, val) {

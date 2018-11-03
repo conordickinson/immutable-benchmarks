@@ -10,6 +10,10 @@ import { SimplyImmutable } from './SimplyImmutable';
 import { TestSuite } from './TestSuite';
 import { TimmLib } from './TimmLib';
 
+import * as fs from 'fs';
+import * as path from 'path';
+
+
 import chalk from 'chalk';
 import * as expect from 'expect';
 import * as _ from 'lodash';
@@ -364,11 +368,22 @@ function allTests(output: Outputs, solutionKey: string, solution: TestSuite, ign
   allTests(output, 'seamless-immutable production', new SeamlessLib());
   allTests(output, 'timm', new TimmLib());
 
-  // Deep freeze initial object/array
+  // Deep freeze
   allTests(output, 'Object.assign + freeze', new ObjectAssign(true));
   allTests(output, 'simply-immutable + freeze', new SimplyImmutable(true));
   allTests(output, 'immutable-assign + freeze', new ImmutableAssign(true));
   allTests(output, 'immer + freeze', new ImmerLib(true));
 
-  // TODO output TSV and table view
+  // output TSV
+  const solutions = Object.keys(output);
+  solutions.sort((key1, key2) => {
+    return output[key1]['Total Elapsed'] - output[key2]['Total Elapsed'];
+  });
+
+  const headerRow = [''].concat(Object.keys(output[solutions[0]]));
+  const rows = [ headerRow ].concat(solutions.map(solutionKey => {
+    return [solutionKey].concat(Object.values(output[solutionKey]).map(v => v.toString()));
+  }));
+
+  fs.writeFileSync(path.join(__dirname, '../results/results.csv'), rows.map(r => r.join('\t')).join('\n'));
 }

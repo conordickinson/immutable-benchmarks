@@ -1,0 +1,9 @@
+	Total Elapsed	Total Read	Total Write	Object: read (x500000)	Object: write (x100000)	Object: deep read (x500000)	Object: deep write (x100000)	Object: very deep read (x500000)	Object: very deep write (x100000)	Object: merge (x100000)	Small Array: read (x500000)	Small Array: write (x100000)	Small Array: deep read (x500000)	Small Array: deep write (x100000)	Large Array: read (x500000)	Large Array: write (x100000)	Large Array: deep read (x500000)	Large Array: deep write (x100000)
+Mutable	125	69	56	8	3	2	1	50	30	16	2	1	3	2	2	2	2	1
+timm	1075	124	951	14	55	18	98	53	215	110	11	28	9	28	11	211	8	206
+Object.assign	1428	74	1354	11	91	2	146	50	218	98	3	52	3	63	2	342	3	344
+immutable.js	1601	506	1095	17	24	83	51	249	101	601	17	74	65	91	13	53	62	100
+simply-immutable	1841	72	1769	9	100	3	166	48	352	222	3	68	3	97	3	374	3	390
+immutable-assign	2622	75	2547	9	45	3	195	48	555	44	4	73	4	305	3	423	4	907
+immer setAutoFreeze(false)	5628	102	5526	11	231	8	424	52	804	270	8	299	7	473	7	1421	9	1604
+seamless-immutable production	36819	163	36656	16	364	27	745	76	1742	400	12	1891	11	2491	11	14318	10	14705
