@@ -1,4 +1,4 @@
-import { TestSuite } from './TestSuite';
+import { TestSuite } from '../lib/TestSuite';
 
 export class Mutable extends TestSuite {
   constructor() {

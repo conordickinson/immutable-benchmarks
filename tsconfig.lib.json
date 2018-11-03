@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
-    "baseUrl": "./src",
+    "rootDir": "./lib",
+    "baseUrl": "./lib",
     "alwaysStrict": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
@@ -20,7 +20,6 @@
     }
   },
   "include": [
-    "./lib/*",
-    "./src/*"
+    "./lib/*"
   ]
 }

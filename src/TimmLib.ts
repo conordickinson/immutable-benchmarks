@@ -1,4 +1,4 @@
-import { TestSuite } from './TestSuite';
+import { TestSuite } from '../lib/TestSuite';
 
 import * as timm from 'timm';
 

@@ -1,6 +1,6 @@
+process.env.NODE_ENV = 'production'; // seamless-immutable will use this
+import { TestSuite } from '../lib/TestSuite';
 import * as Seamless from '../node_modules/seamless-immutable/seamless-immutable.production.min';
-
-import { TestSuite } from './TestSuite';
 
 export class SeamlessLib extends TestSuite {
   constructor() {

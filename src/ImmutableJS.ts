@@ -1,5 +1,6 @@
+import { TestSuite } from '../lib/TestSuite';
+
 import * as Immutable from 'immutable';
-import { TestSuite } from './TestSuite';
 
 export class ImmutableJS extends TestSuite {
   constructor() {
