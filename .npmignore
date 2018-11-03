@@ -1,0 +1,8 @@
+lib/
+src/
+results/
+test/
+.vscode/
+.gitignore
+tsconfig.json
+tsconfig.lib.json
