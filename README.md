@@ -9,7 +9,7 @@ Look at results/results.csv to see the latest updated timing results.
 Summarized data here:
 
 |  | Total Elapsed | Total Read | Total Write |
-| --- |
+| - | - | - | - |
 | Mutable | 119 | 69 | 50 |
 | simply-immutable | 730 | 75 | 655 |
 | timm | 1013 | 132 | 881 |
