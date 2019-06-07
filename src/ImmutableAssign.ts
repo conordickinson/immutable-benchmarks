@@ -1,6 +1,6 @@
 import { TestSuite } from '../lib/TestSuite';
 
-import * as iassign from 'immutable-assign';
+import iassign from 'immutable-assign';
 
 export class ImmutableAssign extends TestSuite {
   constructor(useFreeze: boolean) {

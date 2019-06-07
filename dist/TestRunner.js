@@ -1,11 +1,21 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 process.env.NODE_ENV = 'production'; // seamless-immutable will use this
-const chalk_1 = require("chalk");
-const deepFreeze = require("deep-freeze-strict");
-const expect = require("expect");
-const _ = require("lodash");
-const INITIAL_OBJECT = deepFreeze({
+const chalk_1 = __importDefault(require("chalk"));
+const deep_freeze_strict_1 = __importDefault(require("deep-freeze-strict"));
+const expect_1 = __importDefault(require("expect"));
+const _ = __importStar(require("lodash"));
+const INITIAL_OBJECT = deep_freeze_strict_1.default({
     toggle: false,
     b: 3,
     str: 'foo',
@@ -26,7 +36,7 @@ const INITIAL_OBJECT = deepFreeze({
         e2: 'foo'
     }
 });
-const DEEP_PATH = deepFreeze(['d', 'd9', 'b', 'b', 'b']);
+const DEEP_PATH = deep_freeze_strict_1.default(['d', 'd9', 'b', 'b', 'b']);
 const ARRAY_LENGTH1 = 100;
 const ARRAY_LENGTH2 = 1000;
 const INITIAL_ARRAY1 = new Array(ARRAY_LENGTH1);
@@ -34,13 +44,13 @@ const INITIAL_ARRAY2 = new Array(ARRAY_LENGTH2);
 for (let i = 0; i < INITIAL_ARRAY1.length; ++i) {
     INITIAL_ARRAY1[i] = { a: 1, b: 2 };
 }
-deepFreeze(INITIAL_ARRAY1);
+deep_freeze_strict_1.default(INITIAL_ARRAY1);
 for (let i = 0; i < INITIAL_ARRAY2.length; ++i) {
     INITIAL_ARRAY2[i] = { a: 1, b: 2 };
 }
-deepFreeze(INITIAL_ARRAY2);
-const INITIAL_DEEP_ARRAY1 = deepFreeze([0, 1, 2, INITIAL_ARRAY1, [5, 6, 7]]);
-const INITIAL_DEEP_ARRAY2 = deepFreeze([0, 1, 2, INITIAL_ARRAY2, [5, 6, 7]]);
+deep_freeze_strict_1.default(INITIAL_ARRAY2);
+const INITIAL_DEEP_ARRAY1 = deep_freeze_strict_1.default([0, 1, 2, INITIAL_ARRAY1, [5, 6, 7]]);
+const INITIAL_DEEP_ARRAY2 = deep_freeze_strict_1.default([0, 1, 2, INITIAL_ARRAY2, [5, 6, 7]]);
 const R = 5e5;
 const W = R / 5;
 function verify(suite, ignoreMutationError) {
@@ -53,8 +63,8 @@ function verify(suite, ignoreMutationError) {
     results.push('-'); // 1
     let obj2 = suite.set(obj, 'toggle', true);
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { toggle: true }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { toggle: true }));
     }
     addResult(results, suite.get(obj, 'toggle') === false);
     addResult(results, suite.get(obj2, 'toggle') === true);
@@ -63,16 +73,16 @@ function verify(suite, ignoreMutationError) {
     results.push('-'); // 2
     obj2 = suite.set(obj, 'str', 'foo');
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { str: 'foo' }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { str: 'foo' }));
     }
     addResult(results, obj2 === obj);
     addResult(results, suite.get(obj2, 'd') === suite.get(obj, 'd'));
     results.push('-'); // 3
     obj2 = suite.setDeep(obj, 'd', 'd1', 3);
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d1: 3 } }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d1: 3 } }));
     }
     addResult(results, suite.getDeep(obj, 'd', 'd1') === 6);
     addResult(results, suite.getDeep(obj2, 'd', 'd1') === 3);
@@ -82,24 +92,24 @@ function verify(suite, ignoreMutationError) {
     results.push('-'); // 4
     obj2 = suite.set(obj, 'b', suite.get(obj, 'b'));
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(INITIAL_OBJECT);
     }
     addResult(results, obj2 === obj);
     addResult(results, suite.get(obj2, 'd') === suite.get(obj, 'd'));
     results.push('-'); // 5
     obj2 = suite.set(obj, 'str', 'bar');
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { str: 'bar' }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { str: 'bar' }));
     }
     addResult(results, obj2 !== obj);
     addResult(results, suite.get(obj2, 'd') === suite.get(obj, 'd'));
     obj = suite.init(INITIAL_OBJECT);
     obj2 = suite.setDeep(obj, 'd', 'd1', 6);
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d1: 6 } }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d1: 6 } }));
     }
     addResult(results, suite.getDeep(obj, 'd', 'd1') === 6);
     addResult(results, suite.getDeep(obj2, 'd', 'd1') === 6);
@@ -108,8 +118,8 @@ function verify(suite, ignoreMutationError) {
     results.push('-'); // 6
     obj2 = suite.setIn(obj, DEEP_PATH, 3);
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d9: { b: { b: { b: 3 } } } } }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { d: { d9: { b: { b: { b: 3 } } } } }));
     }
     addResult(results, obj2 !== obj);
     addResult(results, suite.get(obj2, 'd') !== suite.get(obj, 'd'));
@@ -122,8 +132,8 @@ function verify(suite, ignoreMutationError) {
         f: null
     });
     if (!ignoreMutationError) {
-        expect(obj).toEqual(INITIAL_OBJECT);
-        expect(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { c: 5, f: null }));
+        expect_1.default(obj).toEqual(INITIAL_OBJECT);
+        expect_1.default(obj2).toEqual(_.merge(_.cloneDeep(INITIAL_OBJECT), { c: 5, f: null }));
     }
     addResult(results, obj2 !== obj);
     addResult(results, suite.get(obj2, 'd') === suite.get(obj, 'd'));
@@ -135,18 +145,18 @@ function verify(suite, ignoreMutationError) {
         b: 3
     });
     if (!ignoreMutationError) {
-        expect(arr).toEqual(INITIAL_ARRAY1);
+        expect_1.default(arr).toEqual(INITIAL_ARRAY1);
         const expectedArr2 = _.cloneDeep(INITIAL_ARRAY1);
         expectedArr2[1] = { b: 3 };
-        expect(arr2).toEqual(expectedArr2);
+        expect_1.default(arr2).toEqual(expectedArr2);
     }
     addResult(results, arr2 !== arr);
     addResult(results, suite.getAt(arr, 1).b === 2);
     addResult(results, suite.getAt(arr2, 1).b === 3);
     arr2 = suite.setAt(arr, 1, suite.getAt(arr, 1));
     if (!ignoreMutationError) {
-        expect(arr).toEqual(INITIAL_ARRAY1);
-        expect(arr2).toEqual(INITIAL_ARRAY1);
+        expect_1.default(arr).toEqual(INITIAL_ARRAY1);
+        expect_1.default(arr2).toEqual(INITIAL_ARRAY1);
     }
     addResult(results, arr2 === arr);
     results.push('-'); // 9
@@ -155,18 +165,18 @@ function verify(suite, ignoreMutationError) {
         b: 3
     });
     if (!ignoreMutationError) {
-        expect(arr).toEqual(INITIAL_DEEP_ARRAY1);
+        expect_1.default(arr).toEqual(INITIAL_DEEP_ARRAY1);
         const expectedArr2 = _.cloneDeep(INITIAL_DEEP_ARRAY1);
         expectedArr2[3][0] = { b: 3 };
-        expect(arr2).toEqual(expectedArr2);
+        expect_1.default(arr2).toEqual(expectedArr2);
     }
     addResult(results, arr2 !== arr);
     addResult(results, suite.get(suite.getAtDeep(arr, 3, 0), "b") === 2);
     addResult(results, suite.getAtDeep(arr2, 3, 0).b === 3);
     arr2 = suite.setAtDeep(arr, 3, 1, suite.getAtDeep(arr, 3, 1));
     if (!ignoreMutationError) {
-        expect(arr).toEqual(INITIAL_DEEP_ARRAY1);
-        expect(arr2).toEqual(INITIAL_DEEP_ARRAY1);
+        expect_1.default(arr).toEqual(INITIAL_DEEP_ARRAY1);
+        expect_1.default(arr2).toEqual(INITIAL_DEEP_ARRAY1);
     }
     addResult(results, arr2 === arr);
     return console.log("  Verification: " + (results.join('')));

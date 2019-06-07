@@ -1,4 +1,4 @@
-import { runTestSuite } from '../lib/TestRunner';
+import { runTestSuite, Outputs } from '../lib/TestRunner';
 import { ImmerLib } from './ImmerLib';
 import { ImmutableAssign } from './ImmutableAssign';
 import { ImmutableJS } from './ImmutableJS';
@@ -11,7 +11,7 @@ import { TimmLib } from './TimmLib';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const output = {};
+const output: Record<string, Outputs> = {};
 output['Mutable'] = runTestSuite('Mutable', new Mutable(), true);
 output['Object.assign'] = runTestSuite('Object.assign', new ObjectAssign(false));
 output['simply-immutable'] = runTestSuite('simply-immutable', new SimplyImmutable(false));
