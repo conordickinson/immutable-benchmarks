@@ -1,4 +1,4 @@
-import * as deepFreeze from 'deep-freeze-strict';
+import deepFreeze from 'deep-freeze-strict';
 import * as _ from 'lodash';
 
 export abstract class TestSuite {

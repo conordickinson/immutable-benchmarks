@@ -3,8 +3,8 @@ process.env.NODE_ENV = 'production'; // seamless-immutable will use this
 import { TestSuite } from './TestSuite';
 
 import chalk from 'chalk';
-import * as deepFreeze from 'deep-freeze-strict';
-import * as expect from 'expect';
+import deepFreeze from 'deep-freeze-strict';
+import expect from 'expect';
 import * as _ from 'lodash';
 
 const INITIAL_OBJECT = deepFreeze({
